@@ -3,73 +3,69 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Macondo&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
     <title>Tic Tac Toe</title>
   </head>
   <body>
-    <header>
-      <h1>Tic Tac Toe</h1>
-    </header>
+    <header><h1>Tic Tac Toe</h1></header>
     <main>
-      <section class="user-input">
-        <div class="user1-input">
-          <label for="player1-name">Player 1 Name:</label>
-          <input
-            type="text"
-            name="player1_name"
-            id="player1-name"
-            placeholder="Enter player 1 name"
-            required
-          />
-          <label for="player1-symbol">Player 1 Symbol:</label>
-          <input
-            type="text"
-            name="player1_symbol"
-            id="player1-symbol"
-            placeholder="Enter player 1 symbol"
-            required
-          />
-        </div>
-        <div class="user2-input">
-          <label for="player2-name">Player 2 Name:</label>
-          <input
-            type="text"
-            name="player2_name"
-            id="player2-name"
-            placeholder="Enter player 2 name"
-            required
-          />
-          <label for="player2-symbol">Player 2 Symbol:</label>
-          <input
-            type="text"
-            name="player2_symbol"
-            id="player2-symbol"
-            placeholder="Enter player 2 symbol"
-            required
-          />
-        </div>
-        <button id="confirm">Confirm</button>
-      </section>
-      <section class="game-board">
-        <div class="board">
-          <div class="cell" data-cell-index="0"></div>
-          <div class="cell" data-cell-index="1"></div>
-          <div class="cell" data-cell-index="2"></div>
-          <div class="cell" data-cell-index="3"></div>
-          <div class="cell" data-cell-index="4"></div>
-          <div class="cell" data-cell-index="5"></div>
-          <div class="cell" data-cell-index="6"></div>
-          <div class="cell" data-cell-index="7"></div>
-          <div class="cell" data-cell-index="8"></div>
-        </div>
-      </section>
-      <section class="game-info">
-        <p class="turn-info"></p>
-        <button id="restart">Restart Game</button>
-      </section>
-      <section class="game-result">
-        <div class="result-text"></div>
-        <button id="reset-game">Reset Game</button>
-      </section>
+      <div class="user-input">
+        <label for="player-name1"> Player 1 Name: </label>
+        <input
+          type="text"
+          name="player_name1"
+          id="player-name1"
+          placeholder="Enter Player 1 Name"
+          required
+        />
+        <label for="player-name2"> Player 2 Name: </label>
+        <input
+          type="text"
+          name="player_name2"
+          id="player-name2"
+          placeholder="Enter Player 2 Name"
+          required
+        />
+        <label for="player1-symbol">
+          Player 1 Symbol:
+          <input type="radio" name="player1-symbol" value="X" required /> X
+          <input type="radio" name="player1-symbol" value="O" required /> O
+        </label>
+        <label for="player2-symbol">
+          Player 2 Symbol:
+          <input type="radio" name="player2-symbol" value="X" required /> X
+          <input type="radio" name="player2-symbol" value="O" required /> O
+        </label>
+        <button id="start-game">Start Game</button>
+      </div>
+      <div class="game-board">
+        <div class="cell" data-cell-index="0"></div>
+        <div class="cell" data-cell-index="1"></div>
+        <div class="cell" data-cell-index="2"></div>
+        <div class="cell" data-cell-index="3"></div>
+        <div class="cell" data-cell-index="4"></div>
+        <div class="cell" data-cell-index="5"></div>
+        <div class="cell" data-cell-index="6"></div>
+        <div class="cell" data-cell-index="7"></div>
+        <div class="cell" data-cell-index="8"></div>
+      </div>
+      <div class="turn-indicator">
+        <div class="player active" id="player1"></div>
+        <div class="player" id="player2"></div>
+      </div>
+      <div class="utility-buttons">
+        <button id="restart-game">Restart Game</button>
+        <button id="play-again">Play Again</button>
+      </div>
+      <div class="show-result"></div>
     </main>
+    <footer>made with ❤️ by kpcodes30
+    </footer>
   </body>
 </html>
