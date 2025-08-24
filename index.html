@@ -31,16 +31,22 @@
           required
         />
         <div class="symbol-select">
-          <span>Player 1 Symbol:</span>
-          <label
-            ><input type="radio" name="player1-symbol" value="X" required />
-            X</label
-          >
-          <label
-            ><input type="radio" name="player1-symbol" value="O" required />
-            O</label
-          >
-          <span id="auto-symbol" style="margin-left: 1.5em"></span>
+          <div class="player-symbol-group">
+            <span>Player 1 Symbol:</span>
+            <div class="symbol-options">
+              <label
+                ><input type="radio" name="player1-symbol" value="X" required />
+                X</label
+              >
+              <label
+                ><input type="radio" name="player1-symbol" value="O" required />
+                O</label
+              >
+            </div>
+          </div>
+          <div class="player-symbol-group">
+            <span id="auto-symbol"></span>
+          </div>
         </div>
         <button id="start-game">Start Game</button>
       </div>

@@ -118,6 +118,12 @@ main {
   color: #ffd700;
   font-size: 1.1rem;
 }
+
+.player-symbol-group,
+.symbol-options {
+  display: contents;
+}
+
 .symbol-select label {
   color: #ffd700;
   font-weight: 500;
@@ -232,9 +238,21 @@ footer {
   }
 
   .symbol-select {
-    flex-direction: column; /* Stack the symbol options vertically */
-    align-items: flex-start; /* Align items to the left */
-    gap: 0.8rem; /* Adjust spacing between stacked items */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .player-symbol-group,
+  .symbol-options {
+    display: flex; /* Override display: contents */
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .player-symbol-group > span:first-child {
+    min-width: 125px;
   }
 
   #auto-symbol {
