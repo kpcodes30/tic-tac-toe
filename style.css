@@ -202,6 +202,13 @@ main {
 .utility-buttons button:hover {
   background: #e6c200;
 }
+.utility-buttons button#reset-game {
+  background: #ff5722; 
+}
+
+.utility-buttons button#reset-game:hover {
+  background: #e64a19; 
+}
 .show-result {
   margin-top: 1rem;
   font-size: 1.3rem;
