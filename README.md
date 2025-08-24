@@ -30,4 +30,4 @@ Play a modern, animated Tic Tac Toe game in your browser!
 
 Made with ❤️ by [kpcodes30](https://github.com/kpcodes30)
 
-# tic-tac-toe
+
