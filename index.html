@@ -15,57 +15,55 @@
   <body>
     <header><h1>Tic Tac Toe</h1></header>
     <main>
-      <div class="user-input">
-        <label for="player-name1"> Player 1 Name: </label>
+      <div class="setup-panel" id="setup-panel">
+        <label for="player1-name">Player 1 Name:</label>
         <input
           type="text"
-          name="player_name1"
-          id="player-name1"
+          id="player1-name"
           placeholder="Enter Player 1 Name"
           required
         />
-        <label for="player-name2"> Player 2 Name: </label>
+        <label for="player2-name">Player 2 Name:</label>
         <input
           type="text"
-          name="player_name2"
-          id="player-name2"
+          id="player2-name"
           placeholder="Enter Player 2 Name"
           required
         />
-        <label for="player1-symbol">
-          Player 1 Symbol:
-          <input type="radio" name="player1-symbol" value="X" required /> X
-          <input type="radio" name="player1-symbol" value="O" required /> O
-        </label>
-        <label for="player2-symbol">
-          Player 2 Symbol:
-          <input type="radio" name="player2-symbol" value="X" required /> X
-          <input type="radio" name="player2-symbol" value="O" required /> O
-        </label>
+        <div class="symbol-select">
+          <span>Player 1 Symbol:</span>
+          <label
+            ><input type="radio" name="player1-symbol" value="X" required />
+            X</label
+          >
+          <label
+            ><input type="radio" name="player1-symbol" value="O" required />
+            O</label
+          >
+          <span id="auto-symbol" style="margin-left: 1.5em"></span>
+        </div>
         <button id="start-game">Start Game</button>
       </div>
-      <div class="game-board">
-        <div class="cell" data-cell-index="0"></div>
-        <div class="cell" data-cell-index="1"></div>
-        <div class="cell" data-cell-index="2"></div>
-        <div class="cell" data-cell-index="3"></div>
-        <div class="cell" data-cell-index="4"></div>
-        <div class="cell" data-cell-index="5"></div>
-        <div class="cell" data-cell-index="6"></div>
-        <div class="cell" data-cell-index="7"></div>
-        <div class="cell" data-cell-index="8"></div>
+      <div class="game-panel" id="game-panel" style="display: none">
+        <div class="turn-indicator" id="turn-indicator"></div>
+        <div class="game-board" id="game-board">
+          <div class="cell" data-cell-index="0"></div>
+          <div class="cell" data-cell-index="1"></div>
+          <div class="cell" data-cell-index="2"></div>
+          <div class="cell" data-cell-index="3"></div>
+          <div class="cell" data-cell-index="4"></div>
+          <div class="cell" data-cell-index="5"></div>
+          <div class="cell" data-cell-index="6"></div>
+          <div class="cell" data-cell-index="7"></div>
+          <div class="cell" data-cell-index="8"></div>
+        </div>
+        <div class="utility-buttons">
+          <button id="restart-game">Restart Game</button>
+        </div>
+        <div class="show-result" id="show-result"></div>
       </div>
-      <div class="turn-indicator">
-        <div class="player active" id="player1"></div>
-        <div class="player" id="player2"></div>
-      </div>
-      <div class="utility-buttons">
-        <button id="restart-game">Restart Game</button>
-        <button id="play-again">Play Again</button>
-      </div>
-      <div class="show-result"></div>
     </main>
-    <footer>made with ❤️ by kpcodes30
-    </footer>
+    <footer>made with ❤️ by kpcodes30</footer>
+    <script src="script.js"></script>
   </body>
 </html>
