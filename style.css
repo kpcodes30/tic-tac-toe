@@ -203,11 +203,11 @@ main {
   background: #e6c200;
 }
 .utility-buttons button#reset-game {
-  background: #ff5722; 
+  background: #ff5722;
 }
 
 .utility-buttons button#reset-game:hover {
-  background: #e64a19; 
+  background: #e64a19;
 }
 .show-result {
   margin-top: 1rem;
@@ -221,4 +221,34 @@ footer {
   margin: 2rem 0 1rem 0;
   color: #00e6e6;
   font-size: 1rem;
+}
+
+/* --- Responsive Design --- */
+/* Styles for screens smaller than 480px (e.g., mobile phones) */
+@media (max-width: 480px) {
+  .setup-panel {
+    min-width: 90%; /* Use a percentage for better flexibility */
+    padding: 1.5rem;
+  }
+
+  .symbol-select {
+    flex-direction: column; /* Stack the symbol options vertically */
+    align-items: flex-start; /* Align items to the left */
+    gap: 0.8rem; /* Adjust spacing between stacked items */
+  }
+
+  #auto-symbol {
+    margin-left: 0; /* Remove the left margin for the auto-symbol span */
+  }
+
+  .game-board {
+    width: 270px; /* Slightly smaller board for small screens */
+    height: 270px;
+  }
+
+  .cell {
+    min-width: 90px; /* Adjust cell size accordingly */
+    min-height: 90px;
+    font-size: 2rem; /* Make the X/O symbols a bit smaller */
+  }
 }
