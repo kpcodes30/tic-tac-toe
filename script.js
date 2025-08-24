@@ -70,17 +70,33 @@ document.addEventListener("DOMContentLoaded", function () {
       [0, 4, 8],
       [2, 4, 6],
     ];
-    return winPatterns.some((pattern) =>
-      pattern.every((idx) => board[idx] === symbol)
-    );
+    for (let pattern of winPatterns) {
+      if (pattern.every((idx) => board[idx] === symbol)) {
+        return pattern;
+      }
+    }
+    return null;
   }
 
   function showResult(msg) {
-    showResultDiv.textContent = msg;
+    if (msg.includes("wins")) {
+      showResultDiv.textContent = "🏆 " + msg + " 🎉";
+    } else if (msg.toLowerCase().includes("draw")) {
+      showResultDiv.textContent = "🤝 " + msg;
+    } else if (msg.toLowerCase().includes("please")) {
+      showResultDiv.textContent = "⚠️ " + msg;
+    } else {
+      showResultDiv.textContent = msg;
+    }
   }
 
-  function endGame(msg) {
+  function endGame(msg, winPattern) {
     gameActive = false;
+    if (winPattern) {
+      winPattern.forEach((idx) => {
+        cells[idx].classList.add("win-row");
+      });
+    }
     showResult(msg);
   }
 
@@ -103,8 +119,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (board[idx]) return;
       board[idx] = players[current].symbol;
       updateBoard();
-      if (winChecker(players[current].symbol)) {
-        endGame(`${players[current].name} wins!`);
+      const winPattern = winChecker(players[current].symbol);
+      if (winPattern) {
+        endGame(`${players[current].name} wins!`, winPattern);
         return;
       }
       if (board.every((cell) => cell)) {
