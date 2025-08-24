@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const autoSymbol = document.getElementById("auto-symbol");
   const startBtn = document.getElementById("start-game");
   const boardDiv = document.getElementById("game-board");
+  const resetBtn = document.getElementById("reset-game");
   const turnIndicator = document.getElementById("turn-indicator");
   const showResultDiv = document.getElementById("show-result");
   const restartBtn = document.getElementById("restart-game");
@@ -132,7 +133,7 @@ document.addEventListener("DOMContentLoaded", function () {
       updateTurn();
     });
   });
-  // --- Start/Restart ---
+  // --- Start/Restart/Reset ---
   startBtn.addEventListener("click", playGame);
   restartBtn.addEventListener("click", function () {
     board = Array(9).fill("");
@@ -141,5 +142,19 @@ document.addEventListener("DOMContentLoaded", function () {
     showResult("");
     updateBoard();
     updateTurn();
+    // Remove win highlight
+    cells.forEach((cell) => cell.classList.remove("win-row"));
+  });
+
+  // Reset Game button in game panel
+  resetBtn.addEventListener("click", function () {
+    // Remove win highlight
+    cells.forEach((cell) => cell.classList.remove("win-row"));
+    // Reset panels
+    setupPanel.style.display = "flex";
+    gamePanel.style.display = "none";
+    showResult("");
+    board = Array(9).fill("");
+    updateBoard();
   });
 });
