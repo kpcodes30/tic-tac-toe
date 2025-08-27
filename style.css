@@ -1,17 +1,25 @@
-.win-row {
-  animation: win-flash 0.3s alternate 4;
-  background: #ffd700 !important;
-  color: #23272f !important;
+.win-highlight {
+  position: absolute;
+  pointer-events: none;
+  border: 7px solid #ff1744;
+  border-radius: 12px;
+  animation: win-blink 0.5s linear infinite;
+  z-index: 10;
+  box-sizing: border-box;
 }
 
-@keyframes win-flash {
-  from {
-    background: #ffd700;
-    color: #23272f;
+@keyframes win-blink {
+  0% {
+    border-color: #ff1744;
+    box-shadow: 0 0 0 0 #ff1744;
   }
-  to {
-    background: #fffbe6;
-    color: #23272f;
+  50% {
+    border-color: #fff;
+    box-shadow: 0 0 10px 2px #fff;
+  }
+  100% {
+    border-color: #ff1744;
+    box-shadow: 0 0 0 0 #ff1744;
   }
 }
 :root {
@@ -128,6 +136,7 @@ main {
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   border: 2px solid #00e6e6;
+  position: relative;
 }
 .cell {
   width: 33.33%;

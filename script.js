@@ -93,12 +93,59 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function endGame(msg, winPattern) {
     gameActive = false;
+    removeHighlight();
     if (winPattern) {
-      winPattern.forEach((idx) => {
-        cells[idx].classList.add("win-row");
-      });
+      addHighlight(winPattern);
     }
     showResult(msg);
+  }
+
+  function addHighlight(pattern) {
+    // Remove any existing highlight
+    removeHighlight();
+    const highlight = document.createElement("div");
+    highlight.className = "win-highlight";
+    // Calculate position/size
+    // Board is 3x3, cells are 100x100 (or 33.33%)
+    let pos = getHighlightPosition(pattern);
+    if (pos) {
+      highlight.style.left = pos.left + "%";
+      highlight.style.top = pos.top + "%";
+      highlight.style.width = pos.width + "%";
+      highlight.style.height = pos.height + "%";
+      highlight.style.transform = pos.rotate ? `rotate(${pos.rotate}deg)` : "";
+      boardDiv.appendChild(highlight);
+    }
+  }
+
+  function removeHighlight() {
+    const old = boardDiv.querySelector(".win-highlight");
+    if (old) old.remove();
+  }
+
+  function getHighlightPosition(pattern) {
+    // Returns {left, top, width, height, rotate}
+    // All values in % of board
+    // Rows
+    if (pattern[0] === 0 && pattern[1] === 1 && pattern[2] === 2)
+      return { left: 0, top: 0, width: 100, height: 33.33 };
+    if (pattern[0] === 3 && pattern[1] === 4 && pattern[2] === 5)
+      return { left: 0, top: 33.33, width: 100, height: 33.33 };
+    if (pattern[0] === 6 && pattern[1] === 7 && pattern[2] === 8)
+      return { left: 0, top: 66.66, width: 100, height: 33.33 };
+    // Columns
+    if (pattern[0] === 0 && pattern[1] === 3 && pattern[2] === 6)
+      return { left: 0, top: 0, width: 33.33, height: 100 };
+    if (pattern[0] === 1 && pattern[1] === 4 && pattern[2] === 7)
+      return { left: 33.33, top: 0, width: 33.33, height: 100 };
+    if (pattern[0] === 2 && pattern[1] === 5 && pattern[2] === 8)
+      return { left: 66.66, top: 0, width: 33.33, height: 100 };
+    // Diagonals
+    if (pattern[0] === 0 && pattern[1] === 4 && pattern[2] === 8)
+      return { left: 0, top: 0, width: 100, height: 100, rotate: 45 };
+    if (pattern[0] === 2 && pattern[1] === 4 && pattern[2] === 6)
+      return { left: 0, top: 0, width: 100, height: 100, rotate: -45 };
+    return null;
   }
 
   // --- UI/Board helpers ---
