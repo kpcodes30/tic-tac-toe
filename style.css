@@ -200,9 +200,16 @@ main {
 }
 footer {
   text-align: center;
-  margin: 2rem 0 1rem 0;
   color: #00e6e6;
   font-size: 1rem;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  background: #181c22;
+  padding: 0.7rem 0 0.5rem 0;
+  z-index: 100;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.12);
 }
 
 /* --- Responsive Design --- */
