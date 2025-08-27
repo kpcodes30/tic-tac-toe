@@ -1,3 +1,8 @@
+footer .footer-link {
+  text-decoration: none;
+  color: inherit;
+  font-weight: bold;
+}
 .win-highlight {
   position: absolute;
   pointer-events: none;
