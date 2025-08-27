@@ -190,13 +190,13 @@ document.addEventListener("DOMContentLoaded", function () {
     updateBoard();
     updateTurn();
     // Remove win highlight
-    cells.forEach((cell) => cell.classList.remove("win-row"));
+    removeHighlight();
   });
 
   // Reset Game button in game panel
   resetBtn.addEventListener("click", function () {
     // Remove win highlight
-    cells.forEach((cell) => cell.classList.remove("win-row"));
+    removeHighlight();
     // Reset panels
     setupPanel.style.display = "flex";
     gamePanel.style.display = "none";
