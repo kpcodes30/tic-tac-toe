@@ -1,20 +1,18 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // --- DOM refs ---
   const setupPanel = document.getElementById("setup-panel");
   const gamePanel = document.getElementById("game-panel");
   const player1NameInput = document.getElementById("player1-name");
   const player2NameInput = document.getElementById("player2-name");
-  const symbolRadios = document.getElementsByName("player1-symbol");
-  const autoSymbol = document.getElementById("auto-symbol");
-  const startBtn = document.getElementById("start-game");
-  const boardDiv = document.getElementById("game-board");
-  const resetBtn = document.getElementById("reset-game");
-  const turnIndicator = document.getElementById("turn-indicator");
+  const player1SymbolRadios = document.getElementsByName("player1-symbol");
+  const autoSymbolSpan = document.getElementById("auto-symbol");
+  const startGameBtn = document.getElementById("start-game");
+  const gameBoardDiv = document.getElementById("game-board");
+  const resetGameBtn = document.getElementById("reset-game");
+  const turnIndicatorDiv = document.getElementById("turn-indicator");
   const showResultDiv = document.getElementById("show-result");
-  const restartBtn = document.getElementById("restart-game");
-  const cells = boardDiv.querySelectorAll(".cell");
+  const restartGameBtn = document.getElementById("restart-game");
+  const cells = gameBoardDiv.querySelectorAll(".cell");
 
-  // --- State ---
   let board = Array(9).fill("");
   let players = [
     { name: "", symbol: "X" },
@@ -23,23 +21,21 @@ document.addEventListener("DOMContentLoaded", function () {
   let current = 0;
   let gameActive = false;
 
-  // --- Symbol selection logic ---
-  symbolRadios.forEach((radio) => {
+  player1SymbolRadios.forEach((radio) => {
     radio.addEventListener("change", function () {
       if (this.checked) {
-        autoSymbol.textContent = `Player 2 Symbol: ${
+        autoSymbolSpan.textContent = `Player 2 Symbol: ${
           this.value === "X" ? "O" : "X"
         }`;
       }
     });
   });
 
-  // --- Main Functions ---
   function playGame() {
     const name1 = player1NameInput.value.trim();
     const name2 = player2NameInput.value.trim();
     let symbol1 = "";
-    symbolRadios.forEach((r) => {
+    player1SymbolRadios.forEach((r) => {
       if (r.checked) symbol1 = r.value;
     });
     if (!name1 || !name2 || !symbol1) {
@@ -101,12 +97,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function addHighlight(pattern) {
-    // Remove any existing highlight
     removeHighlight();
     const highlight = document.createElement("div");
     highlight.className = "win-highlight";
-    // Calculate position/size
-    // Board is 3x3, cells are 100x100 (or 33.33%)
     let pos = getHighlightPosition(pattern);
     if (pos) {
       highlight.style.left = pos.left + "%";
@@ -114,33 +107,28 @@ document.addEventListener("DOMContentLoaded", function () {
       highlight.style.width = pos.width + "%";
       highlight.style.height = pos.height + "%";
       highlight.style.transform = pos.rotate ? `rotate(${pos.rotate}deg)` : "";
-      boardDiv.appendChild(highlight);
+      gameBoardDiv.appendChild(highlight);
     }
   }
 
   function removeHighlight() {
-    const old = boardDiv.querySelector(".win-highlight");
+    const old = gameBoardDiv.querySelector(".win-highlight");
     if (old) old.remove();
   }
 
   function getHighlightPosition(pattern) {
-    // Returns {left, top, width, height, rotate}
-    // All values in % of board
-    // Rows
     if (pattern[0] === 0 && pattern[1] === 1 && pattern[2] === 2)
       return { left: 0, top: 0, width: 100, height: 33.33 };
     if (pattern[0] === 3 && pattern[1] === 4 && pattern[2] === 5)
       return { left: 0, top: 33.33, width: 100, height: 33.33 };
     if (pattern[0] === 6 && pattern[1] === 7 && pattern[2] === 8)
       return { left: 0, top: 66.66, width: 100, height: 33.33 };
-    // Columns
     if (pattern[0] === 0 && pattern[1] === 3 && pattern[2] === 6)
       return { left: 0, top: 0, width: 33.33, height: 100 };
     if (pattern[0] === 1 && pattern[1] === 4 && pattern[2] === 7)
       return { left: 33.33, top: 0, width: 33.33, height: 100 };
     if (pattern[0] === 2 && pattern[1] === 5 && pattern[2] === 8)
       return { left: 66.66, top: 0, width: 33.33, height: 100 };
-    // Diagonals
     if (pattern[0] === 0 && pattern[1] === 4 && pattern[2] === 8)
       return { left: 0, top: 0, width: 100, height: 100, rotate: 45 };
     if (pattern[0] === 2 && pattern[1] === 4 && pattern[2] === 6)
@@ -148,7 +136,6 @@ document.addEventListener("DOMContentLoaded", function () {
     return null;
   }
 
-  // --- UI/Board helpers ---
   function updateBoard() {
     cells.forEach((cell, idx) => {
       cell.textContent = board[idx];
@@ -156,10 +143,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
   function updateTurn() {
-    turnIndicator.textContent = `${players[current].name}'s turn (${players[current].symbol})`;
+    turnIndicatorDiv.textContent = `${players[current].name}'s turn (${players[current].symbol})`;
   }
 
-  // --- Cell click ---
   cells.forEach((cell) => {
     cell.addEventListener("click", function () {
       if (!gameActive) return;
@@ -180,24 +166,19 @@ document.addEventListener("DOMContentLoaded", function () {
       updateTurn();
     });
   });
-  // --- Start/Restart/Reset ---
-  startBtn.addEventListener("click", playGame);
-  restartBtn.addEventListener("click", function () {
+  startGameBtn.addEventListener("click", playGame);
+  restartGameBtn.addEventListener("click", function () {
     board = Array(9).fill("");
     current = 0;
     gameActive = true;
     showResult("");
     updateBoard();
     updateTurn();
-    // Remove win highlight
     removeHighlight();
   });
 
-  // Reset Game button in game panel
-  resetBtn.addEventListener("click", function () {
-    // Remove win highlight
+  resetGameBtn.addEventListener("click", function () {
     removeHighlight();
-    // Reset panels
     setupPanel.style.display = "flex";
     gamePanel.style.display = "none";
     showResult("");
