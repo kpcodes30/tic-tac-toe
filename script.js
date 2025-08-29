@@ -21,15 +21,56 @@ document.addEventListener("DOMContentLoaded", function () {
   let current = 0;
   let gameActive = false;
 
+  const player1SymbolGroup = document.getElementById("player1-symbol-group");
+  const player2SymbolGroup = document.getElementById("player2-symbol-group");
+  const player1SymbolLabel = document.getElementById("player1-symbol-label");
+  const player2SymbolLabel = document.getElementById("player2-symbol-label");
+
+  player1NameInput.addEventListener("input", function () {
+    if (this.value.trim()) {
+      player1SymbolGroup.style.display = "flex";
+      player1SymbolLabel.textContent = `${capitalize(
+        this.value.trim()
+      )}'s Symbol:`;
+    } else {
+      player1SymbolGroup.style.display = "none";
+      player1SymbolRadios.forEach((r) => (r.checked = false));
+      player2SymbolGroup.style.display = "none";
+      player2SymbolLabel.textContent = "";
+    }
+  });
+
   player1SymbolRadios.forEach((radio) => {
     radio.addEventListener("change", function () {
-      if (this.checked) {
-        autoSymbolSpan.textContent = `Player 2 Symbol: ${
+      if (this.checked && player2NameInput.value.trim()) {
+        player2SymbolGroup.style.display = "flex";
+        const p2name = capitalize(player2NameInput.value.trim());
+        player2SymbolLabel.textContent = `${p2name}'s Symbol: ${
           this.value === "X" ? "O" : "X"
         }`;
+      } else if (!this.checked) {
+        player2SymbolGroup.style.display = "none";
+        player2SymbolLabel.textContent = "";
       }
     });
   });
+
+  player2NameInput.addEventListener("input", function () {
+    const checked = Array.from(player1SymbolRadios).find((r) => r.checked);
+    if (this.value.trim() && checked) {
+      player2SymbolGroup.style.display = "flex";
+      player2SymbolLabel.textContent = `${capitalize(
+        this.value.trim()
+      )}'s Symbol: ${checked.value === "X" ? "O" : "X"}`;
+    } else {
+      player2SymbolGroup.style.display = "none";
+      player2SymbolLabel.textContent = "";
+    }
+  });
+
+  function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
 
   function playGame() {
     const name1 = player1NameInput.value.trim();

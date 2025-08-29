@@ -31,8 +31,12 @@
           required
         />
         <div class="symbol-select">
-          <div class="player-symbol-group">
-            <span>Player 1 Symbol:</span>
+          <div
+            class="player-symbol-group"
+            id="player1-symbol-group"
+            style="display: none"
+          >
+            <span id="player1-symbol-label">Player 1 Symbol:</span>
             <div class="symbol-options">
               <label
                 ><input type="radio" name="player1-symbol" value="X" required />
@@ -44,8 +48,12 @@
               >
             </div>
           </div>
-          <div class="player-symbol-group">
-            <span id="auto-symbol"></span>
+          <div
+            class="player-symbol-group"
+            id="player2-symbol-group"
+            style="display: none"
+          >
+            <span id="player2-symbol-label"></span>
           </div>
         </div>
         <button id="start-game">Start Game</button>
